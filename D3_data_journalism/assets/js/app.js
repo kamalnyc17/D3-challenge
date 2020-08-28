@@ -32,7 +32,7 @@ const chartGroup = svg.append('g')
 let chosenXAxis = 'poverty';
 let chosenYAxis = 'healthcare';
 
-//a function for updating the x-scale variable upon click of label
+//updating the x-scale variable upon click of label
 const xScale = (censusData, chosenXAxis) => {
     //scales
     let xLinearScale = d3.scaleLinear()
@@ -42,7 +42,7 @@ const xScale = (censusData, chosenXAxis) => {
 
     return xLinearScale;
 }
-//a function for updating y-scale variable upon click of label
+//updating y-scale variable upon click of label
 const yScale = (censusData, chosenYAxis) => {
   //scales
   let yLinearScale = d3.scaleLinear()
@@ -52,7 +52,7 @@ const yScale = (censusData, chosenYAxis) => {
 
   return yLinearScale;
 }
-//a function for updating the xAxis upon click
+//updating the xAxis upon click
 renderXAxis = (newXScale, xAxis) => {
   let bottomAxis = d3.axisBottom(newXScale);
 
@@ -63,7 +63,7 @@ renderXAxis = (newXScale, xAxis) => {
   return xAxis;
 }
 
-//function used for updating yAxis variable upon click
+//updating yAxis variable upon click
 renderYAxis = (newYScale, yAxis) => {
   let leftAxis = d3.axisLeft(newYScale);
 
@@ -74,7 +74,7 @@ renderYAxis = (newYScale, yAxis) => {
   return yAxis;
 }
 
-//a function for updating the circles with a transition to new circles 
+//updating the circles with a transition to new circles 
 const renderCircles = (circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) => {
 
     circlesGroup.transition()
@@ -85,7 +85,7 @@ const renderCircles = (circlesGroup, newXScale, chosenXAxis, newYScale, chosenYA
     return circlesGroup;
 }
 
-//function for updating STATE labels
+//updating STATE labels
 const renderText = (textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) => {
 
     textGroup.transition()
@@ -95,7 +95,7 @@ const renderText = (textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) =
 
     return textGroup
 }
-//function to stylize x-axis values for tooltips
+//stylize x-axis values for tooltips
 const styleX = (value, chosenXAxis) => {
 
     //style based on variable
