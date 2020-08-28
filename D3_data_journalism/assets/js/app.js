@@ -29,7 +29,6 @@ var chosenYAxis = "healthcare";
 
 // function used for updating x-scale var upon click on axis label
 function xScale(data, chosenXAxis) {
-  console.log("xScale", chosenXAxis)
   // create scales
   var xLinearScale = d3.scaleLinear()
     .domain([0,
@@ -64,17 +63,15 @@ function renderYAxes(newYScale, y_dynaAxis) {
 
 // function used for updating circles group with a transition to
 // new circles
-function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+function renderCircles(circlesGroup, newXScale, chosenXAxis) {
   circlesGroup.transition()
     .duration(1000)
-    .attr("cx", d => newXScale(d[chosenXAxis]))
-    .attr("cy", d => newYScale(d[chosenYAxis]));
+    .attr("cx", d => newXScale(d[chosenXAxis]));
 
   return circlesGroup;
 }
 
 // function used for updating circles group with new tooltip
-/* KAMAL
 function updateToolTip(chosenXAxis, circlesGroup, chosenYAxis) {
 
   var label;
@@ -82,7 +79,7 @@ function updateToolTip(chosenXAxis, circlesGroup, chosenYAxis) {
     case "poverty":
       label = "Poverty"
       break;
-    case "ageMoe":
+    case "age":
       label = "Age"
       break;
     case "income":
@@ -94,7 +91,6 @@ function updateToolTip(chosenXAxis, circlesGroup, chosenYAxis) {
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      console.log("tooltip ")
       return (`${d.state}<br>${label} ${d[chosenXAxis]}`);
     });
 
@@ -110,17 +106,14 @@ function updateToolTip(chosenXAxis, circlesGroup, chosenYAxis) {
 
   return circlesGroup;
 }
-*/
 // Retrieve data from the CSV file and execute everything below
 d3.csv("assets/data/data.csv").then(function (data) {
-  console.log("data ", data)
   // xLinearScale function above csv import
-  console.log("data chosenXAxis ", chosenXAxis)
   var xLinearScale = xScale(data, chosenXAxis);
 
   // Create y scale function
   var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => parseInt(d.healthcare))])
+    .domain([0, d3.max(data, d => parseInt(d.healthcare)*1.2)])
     .range([height, 0]);
 
   // Create initial axis functions
@@ -145,8 +138,10 @@ d3.csv("assets/data/data.csv").then(function (data) {
     .attr("cx", d => xLinearScale(parseInt(d[chosenXAxis])))
     .attr("cy", d => yLinearScale(parseInt(d.healthcare)))
     .attr("r", d => (d[chosenXAxis] / 2))
-    .attr("fill", "blue")
-    .attr("opacity", ".5");
+    .attr("fill", "red")
+    .attr("opacity", "1")
+    .text(function(d){return d.abbr})
+    .attr("stroke", "black")
 
   // Create group for three x-axis labels
   var labelsGroupX = chartGroup.append("g")
@@ -162,7 +157,7 @@ d3.csv("assets/data/data.csv").then(function (data) {
   var ageLabel = labelsGroupX.append("text")
     .attr("x", 0)
     .attr("y", 40)
-    .attr("value", "ageMoe") // value to grab for event listener
+    .attr("value", "age") // value to grab for event listener
     .classed("inactive", true)
     .text("Age (Median)");
 
@@ -183,7 +178,7 @@ d3.csv("assets/data/data.csv").then(function (data) {
     .text("Lacks Healthcare (%)");
 
   // updateToolTip function above csv import
-  // KAMAL var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+  var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
   // x axis labels event listener
   labelsGroupX.selectAll("text")
@@ -208,7 +203,7 @@ d3.csv("assets/data/data.csv").then(function (data) {
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
 
         // updates tooltips with new info
-        // KAMAL circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+        circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
         // changes classes to change bold text
         switch (chosenXAxis) {
@@ -223,8 +218,8 @@ d3.csv("assets/data/data.csv").then(function (data) {
               .classed("active", false)
               .classed("inactive", true);
             break;
-          case "ageMoe":
-            povertyLabel
+          case "age":
+            povertyLabel            
               .classed("active", false)
               .classed("inactive", true);
             ageLabel
