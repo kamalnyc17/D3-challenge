@@ -33,7 +33,7 @@ let chosenXAxis = 'poverty';
 let chosenYAxis = 'healthcare';
 
 //a function for updating the x-scale variable upon click of label
-function xScale(censusData, chosenXAxis) {
+const xScale = (censusData, chosenXAxis) => {
     //scales
     let xLinearScale = d3.scaleLinear()
       .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
@@ -43,7 +43,7 @@ function xScale(censusData, chosenXAxis) {
     return xLinearScale;
 }
 //a function for updating y-scale variable upon click of label
-function yScale(censusData, chosenYAxis) {
+const yScale = (censusData, chosenYAxis) => {
   //scales
   let yLinearScale = d3.scaleLinear()
     .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.8,
@@ -53,7 +53,7 @@ function yScale(censusData, chosenYAxis) {
   return yLinearScale;
 }
 //a function for updating the xAxis upon click
-function renderXAxis(newXScale, xAxis) {
+renderXAxis = (newXScale, xAxis) => {
   let bottomAxis = d3.axisBottom(newXScale);
 
   xAxis.transition()
@@ -64,7 +64,7 @@ function renderXAxis(newXScale, xAxis) {
 }
 
 //function used for updating yAxis variable upon click
-function renderYAxis(newYScale, yAxis) {
+renderYAxis = (newYScale, yAxis) => {
   let leftAxis = d3.axisLeft(newYScale);
 
   yAxis.transition()
@@ -75,7 +75,7 @@ function renderYAxis(newYScale, yAxis) {
 }
 
 //a function for updating the circles with a transition to new circles 
-function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+const renderCircles = (circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) => {
 
     circlesGroup.transition()
       .duration(2000)
@@ -86,7 +86,7 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYA
 }
 
 //function for updating STATE labels
-function renderText(textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+const renderText = (textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) => {
 
     textGroup.transition()
       .duration(2000)
@@ -96,7 +96,7 @@ function renderText(textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
     return textGroup
 }
 //function to stylize x-axis values for tooltips
-function styleX(value, chosenXAxis) {
+const styleX = (value, chosenXAxis) => {
 
     //style based on variable
     //poverty
@@ -113,7 +113,7 @@ function styleX(value, chosenXAxis) {
 }
 
 //funtion for updating circles group
-function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
+const updateToolTip = (chosenXAxis, chosenYAxis, circlesGroup) => {
     let xLabel, yLabel
     //poverty
     if (chosenXAxis === 'poverty') {
@@ -158,10 +158,8 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 }
 //retrieve data
 d3.csv('./assets/data/data.csv').then(function(censusData) {
-
-    console.log(censusData);
     
-    //Parse data
+    //Parse data to convert text to number
     censusData.forEach(function(data){
         data.obesity = +data.obesity;
         data.income = +data.income;
@@ -281,7 +279,7 @@ d3.csv('./assets/data/data.csv').then(function(censusData) {
 
     //x axis event listener
     xLabelsGroup.selectAll('text')
-      .on('click', function() {
+      .on('click', function () {
         let value = d3.select(this).attr('value');
 
         if (value != chosenXAxis) {
