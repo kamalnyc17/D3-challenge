@@ -6,7 +6,7 @@ const svgHeight = 620;
 const margin = {
   top: 20,
   right: 40,
-  bottom: 200,
+  bottom: 100,
   left: 100
 };
 
