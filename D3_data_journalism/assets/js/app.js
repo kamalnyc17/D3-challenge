@@ -144,9 +144,7 @@ const updateToolTip = (chosenXAxis, chosenYAxis, circlesGroup) => {
   let toolTip = d3.tip()
     .attr('class', 'tooltip')
     .offset([-8, 0])
-    .html(function(d) {
-        return (`${d.state}<br>${xLabel} ${styleX(d[chosenXAxis], chosenXAxis)}<br>${yLabel} ${d[chosenYAxis]}%`);
-  });
+    .html((d) => (`${d.state}<br>${xLabel} ${styleX(d[chosenXAxis], chosenXAxis)}<br>${yLabel} ${d[chosenYAxis]}%`));
 
   circlesGroup.call(toolTip);
 
@@ -160,7 +158,7 @@ const updateToolTip = (chosenXAxis, chosenYAxis, circlesGroup) => {
 d3.csv('./assets/data/data.csv').then(function(censusData) {
     
     //Parse data to convert text to number
-    censusData.forEach(function(data){
+    censusData.map((data) => {
         data.obesity = +data.obesity;
         data.income = +data.income;
         data.smokes = +data.smokes;
@@ -210,7 +208,7 @@ d3.csv('./assets/data/data.csv').then(function(censusData) {
       .attr('y', d => yLinearScale(d[chosenYAxis]))
       .attr('dy', 3)
       .attr('font-size', '10px')
-      .text(function(d){return d.abbr});
+      .text((d) => d.abbr);
 
     //create a group for the x axis labels
     let xLabelsGroup = chartGroup.append('g')
