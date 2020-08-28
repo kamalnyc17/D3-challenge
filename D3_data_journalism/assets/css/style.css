@@ -35,14 +35,13 @@ body {
 .active {
   font-weight: bold;
   fill: #000;
-  fill: #551aaf;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
 
 .inactive {
   font-weight: lighter;
-  fill: #551aaf;
+  fill: #000;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
@@ -61,7 +60,12 @@ body {
   font: 12px sans-serif;
   color: white;
   text-align: center;
-  background: #551aaf;
+  background: #05ac82;
   border: 0;
   border-radius: 10px;
+}
+
+.circleStyle {
+  fill: #1bbe0c;
+  stroke: #094e13;
 }
