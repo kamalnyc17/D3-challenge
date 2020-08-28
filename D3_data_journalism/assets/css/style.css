@@ -17,7 +17,8 @@ body {
 #footer {
   position: absolute;
   bottom: 0;
-  width: 100%; /* Set the fixed height of the footer here */
+  width: 100%;
+  /* Set the fixed height of the footer here */
   height: 10px;
   padding-top: 20px;
   padding-bottom: 40px;
@@ -28,4 +29,25 @@ body {
 #footer p {
   margin: 0;
   font-size: 16px;
+}
+
+/* chart level style */
+.active {
+  font-weight: bold;
+  fill: #000;
+  fill: #551aaf;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+}
+
+.inactive {
+  font-weight: lighter;
+  fill: #551aaf;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+}
+
+.inactive:hover {
+  fill: #e75480;
+  cursor: pointer;
 }
