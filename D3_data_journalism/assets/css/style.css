@@ -79,3 +79,9 @@ body {
   fill: #1bbe0c;
   stroke: #094e13;
 }
+
+.labelText {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  text-anchor: middle;
+}

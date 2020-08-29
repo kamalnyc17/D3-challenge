@@ -161,7 +161,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('transform', `translate(${width / 2}, ${height + 10 + margin.top})`);
 
   const povertyLabelClass = xLabelsGroup.append('text')
-    .classed('aText', true)
+    .classed('labelText', true)
     .classed('active', true)
     .attr('x', 0)
     .attr('y', 20)
@@ -169,7 +169,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .text('In Poverty (%)');
 
   const ageLabelClass = xLabelsGroup.append('text')
-    .classed('aText', true)
+    .classed('labelText', true)
     .classed('inactive', true)
     .attr('x', 0)
     .attr('y', 40)
@@ -177,7 +177,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .text('Age (Median)');
 
   const incomeLabelClass = xLabelsGroup.append('text')
-    .classed('aText', true)
+    .classed('labelText', true)
     .classed('inactive', true)
     .attr('x', 0)
     .attr('y', 60)
@@ -189,7 +189,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('transform', `translate(${0 - margin.left/4}, ${height/2})`);
 
   const healthcareLabelClass = yLabelsGroup.append('text')
-    .classed('aText', true)
+    .classed('labelText', true)
     .classed('active', true)
     .attr('x', 0)
     .attr('y', 0 - 20)
@@ -199,7 +199,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .text('Without Healthcare (%)');
 
   const smokesLabelClass = yLabelsGroup.append('text')
-    .classed('aText', true)
+    .classed('labelText', true)
     .classed('inactive', true)
     .attr('x', 0)
     .attr('y', 0 - 40)
@@ -209,7 +209,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .text('Smoker (%)');
 
   const obesityLabelClass = yLabelsGroup.append('text')
-    .classed('aText', true)
+    .classed('labelText', true)
     .classed('inactive', true)
     .attr('x', 0)
     .attr('y', 0 - 60)
