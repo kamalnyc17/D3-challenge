@@ -160,7 +160,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
   let xLabelsGroup = chartGroup.append('g')
     .attr('transform', `translate(${width / 2}, ${height + 10 + margin.top})`);
 
-  let povertyLabel = xLabelsGroup.append('text')
+  const povertyLabelClass = xLabelsGroup.append('text')
     .classed('aText', true)
     .classed('active', true)
     .attr('x', 0)
@@ -168,7 +168,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('value', 'poverty')
     .text('In Poverty (%)');
 
-  let ageLabel = xLabelsGroup.append('text')
+  const ageLabelClass = xLabelsGroup.append('text')
     .classed('aText', true)
     .classed('inactive', true)
     .attr('x', 0)
@@ -176,7 +176,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('value', 'age')
     .text('Age (Median)');
 
-  let incomeLabel = xLabelsGroup.append('text')
+  const incomeLabelClass = xLabelsGroup.append('text')
     .classed('aText', true)
     .classed('inactive', true)
     .attr('x', 0)
@@ -188,7 +188,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
   let yLabelsGroup = chartGroup.append('g')
     .attr('transform', `translate(${0 - margin.left/4}, ${height/2})`);
 
-  let healthcareLabelClass = yLabelsGroup.append('text')
+  const healthcareLabelClass = yLabelsGroup.append('text')
     .classed('aText', true)
     .classed('active', true)
     .attr('x', 0)
@@ -198,7 +198,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('value', 'healthcare')
     .text('Without Healthcare (%)');
 
-  let smokesLabelClass = yLabelsGroup.append('text')
+  const smokesLabelClass = yLabelsGroup.append('text')
     .classed('aText', true)
     .classed('inactive', true)
     .attr('x', 0)
@@ -208,7 +208,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('value', 'smokes')
     .text('Smoker (%)');
 
-  let obesityLabelClass = yLabelsGroup.append('text')
+  const obesityLabelClass = yLabelsGroup.append('text')
     .classed('aText', true)
     .classed('inactive', true)
     .attr('x', 0)
@@ -236,17 +236,17 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
 
         //change of classes changes text
         if (chosenXAxis === 'poverty') {
-          povertyLabel.classed('active', true).classed('inactive', false);
-          ageLabel.classed('active', false).classed('inactive', true);
-          incomeLabel.classed('active', false).classed('inactive', true);
+          povertyLabelClass.classed('active', true).classed('inactive', false);
+          ageLabelClass.classed('active', false).classed('inactive', true);
+          incomeLabelClass.classed('active', false).classed('inactive', true);
         } else if (chosenXAxis === 'age') {
-          povertyLabel.classed('active', false).classed('inactive', true);
-          ageLabel.classed('active', true).classed('inactive', false);
-          incomeLabel.classed('active', false).classed('inactive', true);
+          povertyLabelClass.classed('active', false).classed('inactive', true);
+          ageLabelClass.classed('active', true).classed('inactive', false);
+          incomeLabelClass.classed('active', false).classed('inactive', true);
         } else {
-          povertyLabel.classed('active', false).classed('inactive', true);
-          ageLabel.classed('active', false).classed('inactive', true);
-          incomeLabel.classed('active', true).classed('inactive', false);
+          povertyLabelClass.classed('active', false).classed('inactive', true);
+          ageLabelClass.classed('active', false).classed('inactive', true);
+          incomeLabelClass.classed('active', true).classed('inactive', false);
         }
       }
     });
