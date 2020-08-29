@@ -75,9 +75,19 @@ body {
   border-radius: 10px;
 }
 
-.circleStyle {
+.circleStyleAge {
   fill: #1bbe0c;
   stroke: #094e13;
+}
+
+.circleStylePoverty {
+  fill: #be7b23;
+  stroke: #362608;
+}
+
+.circleStyleIncome {
+  fill: #3027b3;
+  stroke: #1e0a7a;
 }
 
 .labelText {

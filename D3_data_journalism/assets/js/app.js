@@ -138,7 +138,7 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .data(healthData)
     .enter()
     .append('circle')
-    .classed('circleStyle', true)
+    .classed('circleStylePoverty', true)
     .attr('cx', d => xLinearScale(d[chosenXAxis]))
     .attr('cy', d => yLinearScale(d[chosenYAxis]))
     .attr('r', 14)
@@ -239,14 +239,17 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
           povertyLabelClass.classed('active', true).classed('inactive', false);
           ageLabelClass.classed('active', false).classed('inactive', true);
           incomeLabelClass.classed('active', false).classed('inactive', true);
+          circlesGroup.classed('circleStylePoverty', true).classed('circleStyleAge', false).classed('circleStyleIncome', false);
         } else if (chosenXAxis === 'age') {
           povertyLabelClass.classed('active', false).classed('inactive', true);
           ageLabelClass.classed('active', true).classed('inactive', false);
           incomeLabelClass.classed('active', false).classed('inactive', true);
+          circlesGroup.classed('circleStyleAge', true).classed('circleStylePoverty', false).classed('circleStyleIncome', false);
         } else {
           povertyLabelClass.classed('active', false).classed('inactive', true);
           ageLabelClass.classed('active', false).classed('inactive', true);
           incomeLabelClass.classed('active', true).classed('inactive', false);
+          circlesGroup.classed('circleStyleIncome', true).classed('circleStylePoverty', false).classed('circleStyleAge', false);
         }
       }
     });
@@ -268,14 +271,17 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
           obesityLabelClass.classed('active', true).classed('inactive', false);
           smokesLabelClass.classed('active', false).classed('inactive', true);
           healthcareLabelClass.classed('active', false).classed('inactive', true);
+          circlesGroup.classed('circleStyleIncome', true).classed('circleStylePoverty', false).classed('circleStyleAge', false);
         } else if (chosenYAxis === 'smokes') {
           obesityLabelClass.classed('active', false).classed('inactive', true);
           smokesLabelClass.classed('active', true).classed('inactive', false);
           healthcareLabelClass.classed('active', false).classed('inactive', true);
+          circlesGroup.classed('circleStyleAge', true).classed('circleStylePoverty', false).classed('circleStyleIncome', false);
         } else {
           obesityLabelClass.classed('active', false).classed('inactive', true);
           smokesLabelClass.classed('active', false).classed('inactive', true);
           healthcareLabelClass.classed('active', true).classed('inactive', false);
+          circlesGroup.classed('circleStylePoverty', true).classed('circleStyleAge', false).classed('circleStyleIncome', false);
         }
       }
     });
