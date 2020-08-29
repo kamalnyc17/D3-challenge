@@ -24,15 +24,15 @@ let chosenXAxis = 'poverty';
 let chosenYAxis = 'healthcare';
 
 //updating the x-scale variable upon click of label
-const xScale = (censusData, chosenXAxis) => d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
-      d3.max(censusData, d => d[chosenXAxis]) * 1.2
+const xScale = (healthData, chosenXAxis) => d3.scaleLinear()
+    .domain([d3.min(healthData, d => d[chosenXAxis]) * 0.8,
+      d3.max(healthData, d => d[chosenXAxis]) * 1.2
     ]).range([0, width]);
 
 //updating y-scale variable upon click of label
-const yScale = (censusData, chosenYAxis) => d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.8,
-      d3.max(censusData, d => d[chosenYAxis]) * 1.2
+const yScale = (healthData, chosenYAxis) => d3.scaleLinear()
+    .domain([d3.min(healthData, d => d[chosenYAxis]) * 0.8,
+      d3.max(healthData, d => d[chosenYAxis]) * 1.2
     ]).range([height, 0]);
     
 //updating the xAxis upon click
@@ -101,10 +101,10 @@ const updateToolTip = (chosenXAxis, chosenYAxis, circlesGroup) => {
   return circlesGroup;
 }
 //retrieve data
-d3.csv('./assets/data/data.csv').then(function (censusData) {
+d3.csv('./assets/data/data.csv').then(function (healthData) {
 
   //Parse data to convert text to number
-  censusData.map((data) => {
+  healthData.map((data) => {
     data.obesity = +data.obesity;
     data.income = +data.income;
     data.smokes = +data.smokes;
@@ -114,8 +114,8 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
   });
 
   //create linear scales
-  let xLinearScale = xScale(censusData, chosenXAxis);
-  let yLinearScale = yScale(censusData, chosenYAxis);
+  let xLinearScale = xScale(healthData, chosenXAxis);
+  let yLinearScale = yScale(healthData, chosenYAxis);
 
   //create x axis
   let bottomAxis = d3.axisBottom(xLinearScale);
@@ -135,7 +135,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
 
   //append Circles
   let circlesGroup = chartGroup.selectAll('circle')
-    .data(censusData)
+    .data(healthData)
     .enter()
     .append('circle')
     .classed('circleStyle', true)
@@ -146,7 +146,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
 
   //append Initial Text
   let textGroup = chartGroup.selectAll('.stateText')
-    .data(censusData)
+    .data(healthData)
     .enter()
     .append('text')
     .classed('stateText', true)
@@ -188,7 +188,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
   let yLabelsGroup = chartGroup.append('g')
     .attr('transform', `translate(${0 - margin.left/4}, ${height/2})`);
 
-  let healthcareLabel = yLabelsGroup.append('text')
+  let healthcareLabelClass = yLabelsGroup.append('text')
     .classed('aText', true)
     .classed('active', true)
     .attr('x', 0)
@@ -198,7 +198,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
     .attr('value', 'healthcare')
     .text('Without Healthcare (%)');
 
-  let smokesLabel = yLabelsGroup.append('text')
+  let smokesLabelClass = yLabelsGroup.append('text')
     .classed('aText', true)
     .classed('inactive', true)
     .attr('x', 0)
@@ -208,7 +208,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
     .attr('value', 'smokes')
     .text('Smoker (%)');
 
-  let obesityLabel = yLabelsGroup.append('text')
+  let obesityLabelClass = yLabelsGroup.append('text')
     .classed('aText', true)
     .classed('inactive', true)
     .attr('x', 0)
@@ -228,7 +228,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
 
       if (value != chosenXAxis) {
         chosenXAxis = value
-        xLinearScale = xScale(censusData, chosenXAxis)
+        xLinearScale = xScale(healthData, chosenXAxis)
         xAxis = renderXAxis(xLinearScale, xAxis)
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
         textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
@@ -257,7 +257,7 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
 
       if (value != chosenYAxis) {
         chosenYAxis = value
-        yLinearScale = yScale(censusData, chosenYAxis)
+        yLinearScale = yScale(healthData, chosenYAxis)
         yAxis = renderYAxis(yLinearScale, yAxis)
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
         textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
@@ -265,17 +265,17 @@ d3.csv('./assets/data/data.csv').then(function (censusData) {
 
         //Change of the classes changes text
         if (chosenYAxis === 'obesity') {
-          obesityLabel.classed('active', true).classed('inactive', false);
-          smokesLabel.classed('active', false).classed('inactive', true);
-          healthcareLabel.classed('active', false).classed('inactive', true);
+          obesityLabelClass.classed('active', true).classed('inactive', false);
+          smokesLabelClass.classed('active', false).classed('inactive', true);
+          healthcareLabelClass.classed('active', false).classed('inactive', true);
         } else if (chosenYAxis === 'smokes') {
-          obesityLabel.classed('active', false).classed('inactive', true);
-          smokesLabel.classed('active', true).classed('inactive', false);
-          healthcareLabel.classed('active', false).classed('inactive', true);
+          obesityLabelClass.classed('active', false).classed('inactive', true);
+          smokesLabelClass.classed('active', true).classed('inactive', false);
+          healthcareLabelClass.classed('active', false).classed('inactive', true);
         } else {
-          obesityLabel.classed('active', false).classed('inactive', true);
-          smokesLabel.classed('active', false).classed('inactive', true);
-          healthcareLabel.classed('active', true).classed('inactive', false);
+          obesityLabelClass.classed('active', false).classed('inactive', true);
+          smokesLabelClass.classed('active', false).classed('inactive', true);
+          healthcareLabelClass.classed('active', true).classed('inactive', false);
         }
       }
     });
