@@ -64,13 +64,13 @@ body {
 .tooltip {
   position: absolute;
   width: 135px;
-  height: 60px;
+  height: 80px;
   padding: 2px;
-  padding-top: 8px;
-  font: 12px sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
   color: white;
+  background-color: teal;
   text-align: center;
-  background: #05ac82;
   border: 0;
   border-radius: 10px;
 }

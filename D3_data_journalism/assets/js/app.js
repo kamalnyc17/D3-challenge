@@ -78,7 +78,8 @@ const renderText = (textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) =
   return textGroup
 }
 //stylize x-axis values for tooltips
-const styleX = (value, chosenXAxis) => `${value}%`
+const styleX = (value, chosenXAxis) => (chosenXAxis === 'poverty') ? `${value}%`
+    : (chosenXAxis === 'income') ? `$${value}` : `${value}Yrs`
 
 //funtion for updating circles group
 const updateToolTip = (chosenXAxis, chosenYAxis, circlesGroup) => {
