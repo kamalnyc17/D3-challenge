@@ -145,11 +145,11 @@ d3.csv('./assets/data/data.csv').then(function (healthData) {
     .attr('opacity', '.5');
 
   //append Initial Text
-  let textGroup = chartGroup.selectAll('.stateText')
+  let textGroup = chartGroup.selectAll('.legendText')
     .data(healthData)
     .enter()
     .append('text')
-    .classed('stateText', true)
+    .classed('legendText', true)
     .attr('x', d => xLinearScale(d[chosenXAxis]))
     .attr('y', d => yLinearScale(d[chosenYAxis]))
     .attr('dy', 3)

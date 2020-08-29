@@ -85,3 +85,10 @@ body {
   font-size: 14px;
   text-anchor: middle;
 }
+
+.legendText {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  text-anchor: middle;
+  fill: white;
+}
