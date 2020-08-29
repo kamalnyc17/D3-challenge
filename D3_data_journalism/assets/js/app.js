@@ -1,52 +1,37 @@
-// Set up SVG definitions
+// Set up SVG definitions and chart parameters
 const svgWidth = 960;
 const svgHeight = 620;
-
-// set up borders in svg
 const margin = {
   top: 20,
   right: 40,
   bottom: 100,
   left: 100
 };
-
-// calculate chart height and width
 const width = svgWidth - margin.right - margin.left;
 const height = svgHeight - margin.top - margin.bottom;
 
-// append a div class to the scatter element
+// updating DOM to plot the chart
 const chart = d3.select('#scatter')
   .append('div')
   .classed('chart', true);
-
-//append an svg element to the chart 
 const svg = chart.append('svg')
   .attr('width', svgWidth)
   .attr('height', svgHeight);
-
-//append an svg group
 const chartGroup = svg.append('g')
   .attr('transform', `translate(${margin.left}, ${margin.top})`);
-
-//initial parameters; x and y axis
+// initialization of axis
 let chosenXAxis = 'poverty';
 let chosenYAxis = 'healthcare';
 
 //updating the x-scale variable upon click of label
-const xScale = (censusData, chosenXAxis) => {
-  //scales
-  let xLinearScale = d3.scaleLinear()
+const xScale = (censusData, chosenXAxis) => d3.scaleLinear()
     .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
       d3.max(censusData, d => d[chosenXAxis]) * 1.2
-    ])
-    .range([0, width]);
+    ]).range([0, width]);
 
-  return xLinearScale;
-}
 //updating y-scale variable upon click of label
 const yScale = (censusData, chosenYAxis) => {
-  //scales
-  let yLinearScale = d3.scaleLinear()
+  const yLinearScale = d3.scaleLinear()
     .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.8,
       d3.max(censusData, d => d[chosenYAxis]) * 1.2
     ])
