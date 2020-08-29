@@ -30,15 +30,11 @@ const xScale = (censusData, chosenXAxis) => d3.scaleLinear()
     ]).range([0, width]);
 
 //updating y-scale variable upon click of label
-const yScale = (censusData, chosenYAxis) => {
-  const yLinearScale = d3.scaleLinear()
+const yScale = (censusData, chosenYAxis) => d3.scaleLinear()
     .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.8,
       d3.max(censusData, d => d[chosenYAxis]) * 1.2
-    ])
-    .range([height, 0]);
-
-  return yLinearScale;
-}
+    ]).range([height, 0]);
+    
 //updating the xAxis upon click
 renderXAxis = (newXScale, xAxis) => {
   let bottomAxis = d3.axisBottom(newXScale);
@@ -63,13 +59,12 @@ renderYAxis = (newYScale, yAxis) => {
 
 //updating the circles with a transition to new circles 
 const renderCircles = (circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) => {
-
+  
   circlesGroup.transition()
     .duration(1000)
     .attr('cx', data => newXScale(data[chosenXAxis]))
     .attr('cy', data => newYScale(data[chosenYAxis]))
-
-  return circlesGroup;
+  return circlesGroup
 }
 
 //updating STATE labels
@@ -83,48 +78,14 @@ const renderText = (textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) =
   return textGroup
 }
 //stylize x-axis values for tooltips
-const styleX = (value, chosenXAxis) => {
-
-  //style based on variable
-  //poverty
-  if (chosenXAxis === 'poverty') {
-    return `${value}%`;
-  }
-  //household income
-  else if (chosenXAxis === 'income') {
-    return `${value}`;
-  } else {
-    return `${value}`;
-  }
-}
+const styleX = (value, chosenXAxis) => `${value}%`
 
 //funtion for updating circles group
 const updateToolTip = (chosenXAxis, chosenYAxis, circlesGroup) => {
-  let xLabel, yLabel
-  //poverty
-  if (chosenXAxis === 'poverty') {
-    xLabel = 'Poverty:';
-  }
-  //income
-  else if (chosenXAxis === 'income') {
-    xLabel = 'Median Income:';
-  }
-  //age
-  else {
-    xLabel = 'Age:';
-  }
-  //Y label
-  //healthcare
-  if (chosenYAxis === 'healthcare') {
-    yLabel = "No Healthcare:"
-  } else if (chosenYAxis === 'obesity') {
-    yLabel = 'Obesity:';
-  }
-  //smoking
-  else {
-    yLabel = 'Smokers:';
-  }
-
+  // setting up Axis labels
+  let xLabel = (chosenXAxis === 'poverty') ? 'Poverty:' : (chosenXAxis === 'income') ? 'Median Income:' : 'Age:'
+  let yLabel = (chosenYAxis === 'healthcare') ? 'No Healthcare:' : (chosenYAxis === 'obesity') ? 'Obesity:' : 'Smokers:'
+  
   //create tooltip
   let toolTip = d3.tip()
     .attr('class', 'tooltip')
