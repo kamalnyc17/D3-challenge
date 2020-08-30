@@ -3,7 +3,7 @@
 ## Here are some of the core features of this application: -
 #### All visualizations are at the state level. The state Abbreviation will appear at the center of each circle
 #### The X-Axis will feature Poverty %, Age and Median Income 
-#### The Y-Axis will feature No Healthcare %, Smokers % and Obesity %
+#### The Y-Axis will feature Lack of Healthcare %, Smokers % and Obesity %
 #### Users will be able to click on any Axis label and dynamically plot between two of the data variables such as Healthcare vs. Poverty or Smokers vs. Age etc.
 #### To enhance the visualization, we will rotate through three different colors based on data selection
 #### Users may hover over a scatter plot circle to display corresponding tooltips with exact data points
